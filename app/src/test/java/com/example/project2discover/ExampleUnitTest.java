@@ -1,4 +1,4 @@
-package com.example.comp90018;
+package com.example.project2discover;
 
 import org.junit.Test;
 

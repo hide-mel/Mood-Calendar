@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">project 2 discover</string>
+    <string name="app_name">COMP90018</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Prefer not to respond</item>
+    </string-array>
+    <string name="title_settings">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="back">back</string>
+    <string name="forward">forward</string>
+    <string name="title_calendar">Calendar</string>
+    <string name="title_discover">Discover</string>
 </resources>

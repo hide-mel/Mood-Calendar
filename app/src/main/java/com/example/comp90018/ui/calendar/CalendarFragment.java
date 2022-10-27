@@ -1,39 +1,62 @@
-package codewithcal.au.calendarappexample;
+package com.example.comp90018.ui.calendar;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.arch.lifecycle.ViewModelProvider;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
+import android.view.ViewGroup;
 import android.widget.Toast;
+import android.widget.TextView;
+
+import com.example.comp90018.R;
+import com.example.comp90018.databinding.FragmentCalendarBinding;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+@RequiresApi(api = Build.VERSION_CODES.O)
+public class CalendarFragment extends Fragment implements CalendarAdapter.OnItemListener{
 
-public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener
-{
-    private TextView monthYearText;
+    private FragmentCalendarBinding binding;
+    private View root;
     private RecyclerView calendarRecyclerView;
+    private TextView monthYearText;
     private LocalDate selectedDate;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        CalendarViewModel calendarViewModel =
+                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(CalendarViewModel.class);
+
+        binding = FragmentCalendarBinding.inflate(inflater, container, false);
+        root = binding.getRoot();
         initWidgets();
         selectedDate = LocalDate.now();
+
         setMonthView();
+
+
+        return root;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     private void initWidgets()
     {
-        calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
-        monthYearText = findViewById(R.id.monthYearTV);
+        calendarRecyclerView = root.findViewById(R.id.calendarRecyclerView);
+        monthYearText = root.findViewById(R.id.monthYearTV);
     }
 
     private void setMonthView()
@@ -42,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(root.getContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
@@ -95,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         if(!dayText.equals(""))
         {
             String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            Toast.makeText(root.getContext(), message, Toast.LENGTH_LONG).show();
         }
     }
 }

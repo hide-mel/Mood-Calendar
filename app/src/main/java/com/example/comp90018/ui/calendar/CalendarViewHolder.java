@@ -1,10 +1,12 @@
-package codewithcal.au.calendarappexample;
+package com.example.comp90018.ui.calendar;
 
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import com.example.comp90018.R;
+
 
 public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 {

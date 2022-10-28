@@ -7,7 +7,7 @@
    SPDX-License-Identifier: Apache-2.0
 */
 
-package com.example.comp90018.ui;
+package com.example.comp90018.ui.home.recface.test;
 
 // snippet-start:[rekognition.java2.detect_faces.import]
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;

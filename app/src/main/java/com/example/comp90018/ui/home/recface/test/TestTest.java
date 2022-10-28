@@ -1,4 +1,4 @@
-package com.example.comp90018.ui;
+package com.example.comp90018.ui.home.recface.test;
 
 import com.microsoft.azure.cognitiveservices.vision.faceapi.*;
 import com.microsoft.azure.cognitiveservices.vision.faceapi.models.*;
@@ -65,7 +65,7 @@ public class TestTest {
         /**
          * Authenticate
          */
-        final String KEY = "85fba064f60b4e8d9562b560a076fe8b";
+        final String KEY = "secret";
 
         // Add your region of your Face subscription, for example 'westus', 'eastus', etc.
         // List of Azure Regions: https://docs.microsoft.com/en-us/java/api/com.microsoft.azure.cognitiveservices.vision.faceapi.models.azureregions?view=azure-java-stable

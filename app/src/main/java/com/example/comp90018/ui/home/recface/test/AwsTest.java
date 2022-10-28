@@ -1,27 +1,13 @@
-package com.example.comp90018.ui;
+package com.example.comp90018.ui.home.recface.test;
 
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-import software.amazon.awssdk.core.sync.RequestBody;
-import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
-import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.regions.servicemetadata.RekognitionServiceMetadata;
-import software.amazon.awssdk.services.s3.model.CreateBucketConfiguration;
-import software.amazon.awssdk.services.s3.model.CreateBucketRequest;
-import software.amazon.awssdk.services.s3.model.DeleteBucketRequest;
-import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
-import software.amazon.awssdk.services.s3.model.HeadBucketRequest;
-import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-import software.amazon.awssdk.services.s3.model.S3Exception;
-import software.amazon.awssdk.services.s3.S3Client;
+
 
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.Protocol;
-import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.regions.Regions;
 import com.amazonaws.services.rekognition.AmazonRekognition;
 import com.amazonaws.services.rekognition.AmazonRekognitionClient;
 import com.amazonaws.services.rekognition.model.BoundingBox;
@@ -30,14 +16,7 @@ import com.amazonaws.services.rekognition.model.CompareFacesRequest;
 import com.amazonaws.services.rekognition.model.CompareFacesResult;
 import com.amazonaws.services.rekognition.model.ComparedFace;
 import com.amazonaws.services.rekognition.model.Image;
-import com.amazonaws.services.rekognition.model.S3Object;
-import com.amazonaws.services.rekognition.model.AgeRange;
-import com.amazonaws.services.rekognition.model.Attribute;
-import com.amazonaws.services.rekognition.model.DetectFacesRequest;
-import com.amazonaws.services.rekognition.model.DetectFacesResult;
-import com.amazonaws.services.rekognition.model.FaceDetail;
 import com.amazonaws.util.IOUtils;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -57,8 +36,8 @@ public class AwsTest {
 //        String bucket = "bucket";
 //        ProfileCredentialsProvider p = new ProfileCredentialsProvider();
 //
-//        String accessKey = "AKIA6IGQFLCKW76TNIGC";
-//        String secretKey = "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";
+//        String accessKey = "secret";
+//        String secretKey = "secret";
 //        AWSCredentialsProvider credProvider = new AWSStaticCredentialsProvider(
 //                new BasicAWSCredentials(accessKey, secretKey));
 //        AmazonRekognition rekognitionClient = AmazonRekognitionClientBuilder.standard().withCredentials(credProvider)
@@ -99,8 +78,8 @@ public class AwsTest {
     }
 
     public void compareFaces() {
-        String accessKey = "AKIA6IGQFLCKW76TNIGC";
-        String secretKey = "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";
+        String accessKey = "secret";
+        String secretKey = "secret";
         Float similarityThreshold = 70F;
         String sourceImage = "source.jpg";
         String targetImage = "target.jpg";

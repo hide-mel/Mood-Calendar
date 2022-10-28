@@ -3,11 +3,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string-array name="gender">
-        <item>Male</item>
-        <item>Female</item>
-        <item>Prefer not to respond</item>
-    </string-array>
     <string name="title_settings">Settings</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -15,4 +10,16 @@
     <string name="forward">forward</string>
     <string name="title_calendar">Calendar</string>
     <string name="title_discover">Discover</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="Gender">Gender</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="color_mode">Night Mode</string>
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Prefer not to respond</item>
+    </string-array>
+
 </resources>

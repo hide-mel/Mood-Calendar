@@ -2,7 +2,7 @@ package com.example.comp90018;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;

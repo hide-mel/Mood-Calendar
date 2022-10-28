@@ -1,18 +1,19 @@
 package com.example.comp90018.ui.calendar;
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.comp90018.R;
 import com.example.comp90018.databinding.FragmentCalendarBinding;
@@ -25,7 +26,8 @@ import java.util.ArrayList;
 public class CalendarFragment extends Fragment implements CalendarAdapter.OnItemListener{
 
     private FragmentCalendarBinding binding;
-    private View root;
+    private View view;
+    private int layout = R.layout.fragment_calendar;
     private RecyclerView calendarRecyclerView;
     private TextView monthYearText;
     private LocalDate selectedDate;
@@ -33,18 +35,15 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        CalendarViewModel calendarViewModel =
-                new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(CalendarViewModel.class);
+        view = inflater.inflate(layout,container,false);
 
-        binding = FragmentCalendarBinding.inflate(inflater, container, false);
-        root = binding.getRoot();
         initWidgets();
         selectedDate = LocalDate.now();
 
         setMonthView();
 
 
-        return root;
+        return view;
     }
 
     @Override
@@ -55,8 +54,8 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
     private void initWidgets()
     {
-        calendarRecyclerView = root.findViewById(R.id.calendarRecyclerView);
-        monthYearText = root.findViewById(R.id.monthYearTV);
+        calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
+        monthYearText = view.findViewById(R.id.monthYearTV);
     }
 
     private void setMonthView()
@@ -65,7 +64,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(root.getContext(), 7);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(view.getContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
@@ -118,7 +117,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         if(!dayText.equals(""))
         {
             String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
-            Toast.makeText(root.getContext(), message, Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), message, Toast.LENGTH_LONG).show();
         }
     }
 }

@@ -36,6 +36,18 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <activity
+            android:name=".ui.discover.ArticleActivity"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="ArticleActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
     </application>
 
 </manifest>

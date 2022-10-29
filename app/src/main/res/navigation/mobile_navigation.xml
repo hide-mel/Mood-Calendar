@@ -17,11 +17,11 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.comp90018.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_dashboard"-->
+<!--        android:name="com.example.comp90018.ui.dashboard.DashboardFragment"-->
+<!--        android:label="@string/title_dashboard"-->
+<!--        tools:layout="@layout/fragment_dashboard" />-->
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -30,6 +30,13 @@
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
+        android:id="@+id/navigation_discover"
+        android:name="com.example.comp90018.ui.discover.DiscoverFragment"
+        android:label="@string/title_discover"
+        tools:layout="@layout/fragment_article_recycler" />
+
+    <fragment
+
         android:id="@+id/navigation_settings"
         android:name="com.example.comp90018.ui.settings.SettingsFragment"
         android:label="@string/title_settings"

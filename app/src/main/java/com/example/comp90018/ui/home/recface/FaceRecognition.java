@@ -1,6 +1,20 @@
 package com.example.comp90018.ui.home.recface;
 
+import android.util.Log;
+
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.rekognition.AmazonRekognition;
+import com.amazonaws.services.rekognition.AmazonRekognitionClient;
+
+import software.amazon.awssdk.auth.credentials.AwsCredentials;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProviderFactory;
+import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.rekognition.RekognitionClient;
 import software.amazon.awssdk.services.rekognition.model.Emotion;
@@ -15,11 +29,16 @@ import software.amazon.awssdk.core.SdkBytes;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class FaceRecognition {
-    public static void main(String[] args) {
+    public void recognition(String uri) {
 
+        if (uri == null){
+            return;
+        }
         final String usage = "\n" +
                 "Usage: " +
                 "   <sourceImage>\n\n" +
@@ -31,12 +50,42 @@ public class FaceRecognition {
 //            System.exit(1);
 //        }
 //
-        String sourceImage = "C:\\Users\\96203\\Desktop\\Student ID in Melb.jpg";
+        String sourceImage = uri;
+        Log.d("TAG", "recognition: " + uri);
         Region region = Region.US_EAST_1;
+
+
         RekognitionClient rekClient = RekognitionClient.builder()
                 .region(region)
-                .credentialsProvider(ProfileCredentialsProvider.create())
+                .credentialsProvider(() -> {
+                    AwsCredentials s = null;
+                    try {
+                        Log.d("zisen", "recognition: in" );
+
+                        Class<?> c = Class.forName("software.amazon.awssdk.auth.credentials.AwsBasicCredentials");
+                        Constructor constructor = c.getDeclaredConstructor(String.class,String.class);
+                        Object o = constructor.newInstance("AKIA6IGQFLCKW76TNIGC","YR33ZsCqgjdg6oI9+uZ66ZARisjqkF6oDDHs/3Bh");
+                        s = (AwsBasicCredentials) o;
+                        Log.d("TAG", "recognition: " + s.accessKeyId());
+
+                    } catch (ClassNotFoundException e) {
+                        Log.d("TAG", "recognition: " + e.getMessage());
+                    } catch (NoSuchMethodException e) {
+                        Log.d("TAG", "recognition: " + e.getMessage());
+                    } catch (InvocationTargetException e) {
+                        Log.d("TAG", "recognition: " + e.getMessage());
+                    } catch (IllegalAccessException e) {
+                        Log.d("TAG", "recognition: " + e.getMessage());
+                    } catch (InstantiationException e) {
+                        Log.d("TAG", "recognition: " + e.getMessage());
+                    }
+                    return s;
+
+                })
+
+                .httpClient(UrlConnectionHttpClient.builder().build())
                 .build();
+
 
         System.out.println(rekClient);
 
@@ -71,10 +120,11 @@ public class FaceRecognition {
 
                 System.out.println("There is a smile : "+face.smile().value().toString());
                 for (Emotion e :face.emotions()){
-                    System.out.println(e.typeAsString());
+                    System.out.println(e.typeAsString() + " | Confidence: " + e.confidence());
                 }
+                Log.d("zisen", "detectFacesinImage: " + face.emotions().get(0).typeAsString());
             }
-
+            Log.d("TAG", "detectFacesinImage: end");
         } catch (RekognitionException | FileNotFoundException e) {
             System.out.println(e.getMessage());
             System.exit(1);

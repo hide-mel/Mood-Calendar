@@ -1,7 +1,15 @@
 package com.example.comp90018;
 
+
+import static com.example.comp90018.ui.home.HomeFragment.CAMARA_REQUEST;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.navigation.NavController;

@@ -10,6 +10,8 @@
 package com.example.comp90018.ui.home.recface.test;
 
 // snippet-start:[rekognition.java2.detect_faces.import]
+import android.util.Log;
+
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.rekognition.RekognitionClient;
@@ -44,12 +46,12 @@ public class TestAws {
                 "   <sourceImage>\n\n" +
                 "Where:\n" +
                 "   sourceImage - The path to the image (for example, C:\\AWS\\pic1.png). \n\n";
-//
+
 //        if (args.length != 1) {
 //            System.out.println(usage);
 //            System.exit(1);
 //        }
-//
+
         String sourceImage = "C:\\Users\\96203\\Desktop\\Student ID in Melb.jpg";
         Region region = Region.US_EAST_1;
         RekognitionClient rekClient = RekognitionClient.builder()
@@ -90,6 +92,7 @@ public class TestAws {
 
                 System.out.println("There is a smile : "+face.smile().value().toString());
                 for (Emotion e :face.emotions()){
+                    Log.d("TAG", "detectFacesinImage: " + e.typeAsString());
                     System.out.println(e.typeAsString());
                 }
             }

@@ -40,6 +40,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Map;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
@@ -55,10 +56,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private File tempFile;
     private Uri imageUri;
     private Activity activity;
+    private HomeViewModel model;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(layout,container,false);
+        model = new ViewModelProvider(this).get(HomeViewModel.class);
         mode = "selfie";
         selfie = root.findViewById(R.id.selfie_button);
         selfie.setOnClickListener(this);
@@ -127,12 +130,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 }else if(mode.equals("photo")){
                     toPhoto();
                 }
-
-
-//                Log.d("sss", "onClick: " + "toc finish");
-//                FaceRecognition f =new FaceRecognition();
-//                Log.d("ddd", "onClick: " + "new facerec");
-//                f.recognition(imageUri.getPath());
         }
     }
 
@@ -158,24 +155,29 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
 
         String finalPath = path;
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try  {
-                    //Your code goes here
-                    FaceRecognition f = new FaceRecognition();
-                    f.recognition(finalPath);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }finally{
-                    
+        if (finalPath != null){
+            // face recognition thread
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try  {
+                        //Your code goes here
+                        Thread.sleep(1000);
+                        FaceRecognition f = new FaceRecognition();
+                        Map<String,String> res = f.recognition(finalPath);
+                        StaticLiveData.getInstance().postValue(res);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
+            });
+            thread.start();
+        }
 
-        thread.start();
+        // call emotion result ui
+        Intent intent = new Intent(this.getActivity().getBaseContext(), EmotionResultActivity.class);
+        intent.putExtra("path",finalPath);
+        startActivity(intent);
 
 
 //        File file = new File("~/.aws/credentials");
@@ -226,7 +228,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    public void toCamera(Activity activity) throws IOException {
+    private void toCamera(Activity activity) throws IOException {
         Log.d("zisen","toCamera start");
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         String fileName = "pic_" + System.currentTimeMillis();
@@ -256,7 +258,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    public void toPhoto(){
+    private void toPhoto(){
         Intent intent = new Intent(Intent.ACTION_PICK, null);
         intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*");
         startActivityForResult(intent,PHOTO_REQUEST);

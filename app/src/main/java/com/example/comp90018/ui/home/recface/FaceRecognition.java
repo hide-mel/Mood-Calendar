@@ -31,13 +31,15 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FaceRecognition {
-    public void recognition(String uri) {
+    public Map<String,String> recognition(String uri) {
 
         if (uri == null){
-            return;
+            return null;
         }
         final String usage = "\n" +
                 "Usage: " +
@@ -89,13 +91,14 @@ public class FaceRecognition {
 
         System.out.println(rekClient);
 
-        detectFacesinImage(rekClient, sourceImage );
+        Map<String,String> res = detectFacesinImage(rekClient, sourceImage );
         rekClient.close();
+        return res;
     }
 
     // snippet-start:[rekognition.java2.detect_faces.main]
-    public static void detectFacesinImage(RekognitionClient rekClient,String sourceImage ) {
-
+    public Map<String, String> detectFacesinImage(RekognitionClient rekClient, String sourceImage ) {
+        Map<String,String> res = new HashMap<>();
         try {
             InputStream sourceStream = new FileInputStream(sourceImage);
             SdkBytes sourceBytes = SdkBytes.fromInputStream(sourceStream);
@@ -112,6 +115,10 @@ public class FaceRecognition {
 
             DetectFacesResponse facesResponse = rekClient.detectFaces(facesRequest);
             List<FaceDetail> faceDetails = facesResponse.faceDetails();
+            if (faceDetails.size() > 1){
+                res.put("emotion","More than one face detected");
+                return res;
+            }
             for (FaceDetail face : faceDetails) {
                 AgeRange ageRange = face.ageRange();
                 System.out.println("The detected face is estimated to be between "
@@ -123,11 +130,14 @@ public class FaceRecognition {
                     System.out.println(e.typeAsString() + " | Confidence: " + e.confidence());
                 }
                 Log.d("zisen", "detectFacesinImage: " + face.emotions().get(0).typeAsString());
+                res.put("emotion",face.emotions().get(0).typeAsString());
+                res.put("confidence",face.emotions().get(0).confidence().toString());
             }
             Log.d("TAG", "detectFacesinImage: end");
         } catch (RekognitionException | FileNotFoundException e) {
             System.out.println(e.getMessage());
             System.exit(1);
         }
+        return res;
     }
 }

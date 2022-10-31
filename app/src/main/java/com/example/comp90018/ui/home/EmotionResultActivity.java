@@ -49,20 +49,49 @@ public class EmotionResultActivity extends AppCompatActivity {
 
                     if (emotion == null) {
                         emotion = "NOT HUMAN";
-                        p.setVisibility(View.GONE);
-                        icon.setBackgroundResource(R.drawable.smile_face);
-                        icon.setVisibility(View.VISIBLE);
+                        icon.setBackgroundResource(R.drawable.unknown_emoji);
                     } else if (emotion.equals("More than one face detected") && icon != null) {
-                        //TODO: set icon of unknown
+                        icon.setBackgroundResource(R.drawable.unknown_emoji);
                     } else {
+                        // set ui when receive proper feedback
                         String conf = stringStringMap.get("confidence");
                         if (tConf != null) {
                             tConf.setText("Confidence: " + conf + "%");
                         }
-                        icon.setBackgroundResource(R.drawable.smile_face);
-                        p.setVisibility(View.GONE);
-                        icon.setVisibility(View.VISIBLE);
+                        switch (emotion){
+                            case "HAPPY":
+                                icon.setBackgroundResource(R.drawable.happy_emoji);
+                                break;
+                            case "SAD":
+                                icon.setBackgroundResource(R.drawable.sad_emoji);
+                                break;
+                            case "ANGRY":
+                                icon.setBackgroundResource(R.drawable.angry_emoji);
+                                break;
+                            case "CONFUSED":
+                                icon.setBackgroundResource(R.drawable.confused_emoji);
+                                break;
+                            case "DISGUSTED":
+                                icon.setBackgroundResource(R.drawable.disgusted_emoji);
+                                break;
+                            case "SURPRISED":
+                                icon.setBackgroundResource(R.drawable.surprise_emoji);
+                                break;
+                            case "CALM":
+                                icon.setBackgroundResource(R.drawable.calm_emoji);
+                                break;
+                            case "UNKNOWN":
+                                icon.setBackgroundResource(R.drawable.unknown_emoji);
+                                break;
+                            case "FEAR":
+                                icon.setBackgroundResource(R.drawable.fear_emoji);
+                                break;
+                            default:
+                                icon.setBackgroundResource(R.drawable.smile_face);
+                        }
                     }
+                    p.setVisibility(View.GONE);
+                    icon.setVisibility(View.VISIBLE);
                     if (tRes != null) {
                         tRes.setText(emotion);
                     }

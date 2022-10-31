@@ -177,6 +177,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         // call emotion result ui
         Intent intent = new Intent(this.getActivity().getBaseContext(), EmotionResultActivity.class);
         intent.putExtra("path",finalPath);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
         startActivity(intent);
 
 

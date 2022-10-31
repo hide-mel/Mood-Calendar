@@ -3,6 +3,7 @@ package com.example.comp90018.ui.home;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -30,8 +31,6 @@ public class EmotionResultActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emotion_res);
-
-
         initialize();
 
         // get ViewModel from intent
@@ -41,28 +40,29 @@ public class EmotionResultActivity extends AppCompatActivity {
             @Override
             public void onChanged(Map<String, String> stringStringMap) {
                 // hide progress bar
-                if (p != null){
-                    p.setVisibility(View.GONE);
-                }
-
-                // set result
-                String emotion = stringStringMap.get("emotion");
-                if (tRes != null){
-                    tRes.setText(emotion);
-                }
-                if (emotion.equals("More than one face detected") && icon != null){
-                    //TODO: set icon of unknown
-                }else{
-                    String conf = stringStringMap.get("confidence");
-                    if (tConf != null){
-                        tConf.setText("Confidence: " + conf + "%");
+                if (stringStringMap != null){
+                    if (p != null){
+                        p.setVisibility(View.GONE);
                     }
-                    icon.setBackgroundResource(R.drawable.smile_face);
-                    p.setVisibility(View.GONE);
-                    icon.setVisibility(View.VISIBLE);
+                    Log.e("observer", "onChanged: " + "onchange启动");
+                    // set result
+                    String emotion = stringStringMap.get("emotion");
+                    if (tRes != null){
+                        tRes.setText(emotion);
+                    }
+                    if (emotion.equals("More than one face detected") && icon != null){
+                        //TODO: set icon of unknown
+                    }else{
+                        String conf = stringStringMap.get("confidence");
+                        if (tConf != null){
+                            tConf.setText("Confidence: " + conf + "%");
+                        }
+                        icon.setBackgroundResource(R.drawable.smile_face);
+                        p.setVisibility(View.GONE);
+                        icon.setVisibility(View.VISIBLE);
+                    }
+                    s.setValue(null);
                 }
-
-
             }
         };
 

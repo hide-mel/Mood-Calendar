@@ -1,6 +1,8 @@
 package com.example.comp90018.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.comp90018.AddingActivities;
 import com.example.comp90018.R;
 import com.example.comp90018.databinding.FragmentHomeBinding;
 
@@ -36,6 +39,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         photo.setOnClickListener(this);
         manual = root.findViewById(R.id.manual_button);
         manual.setOnClickListener(this);
+        Button botton = root.findViewById((R.id.button));
+        botton.setOnClickListener(this);
         return root;
 
 
@@ -82,6 +87,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         R.drawable.color_blank_button) );
                 mode = "manual";
                 break;
+            case R.id.button:
+                Intent intent = new Intent(view.getContext(), AddingActivities.class);
+                view.getContext().startActivity(intent);
 
         }
     }

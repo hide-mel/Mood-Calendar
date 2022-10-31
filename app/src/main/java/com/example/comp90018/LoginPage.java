@@ -40,6 +40,12 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page2);
 
+        //check if the file exists
+        File dir = new File(getApplicationContext().getFilesDir(), "config.txt");
+        if(dir.exists()){
+            startActivity(new Intent(LoginPage.this, MainActivity.class));
+        }
+
         //gender spinner
         Spinner spinner = findViewById(R.id.gender_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender, android.R.layout.simple_spinner_item);
@@ -157,13 +163,13 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                     String genderText = spinner.getSelectedItem().toString();
 
                     String buttonText = dateButton.getText().toString();
-                    Log.d("test1", firstNameTxt);
-                    Log.d("test1", lastNameTxt);
-                    Log.d("test1", genderText);
-                    Log.d("test1", buttonText);
+                    //Log.d("test1", firstNameTxt);
+                    //Log.d("test1", lastNameTxt);
+                    //Log.d("test1", genderText);
+                    //Log.d("test1", buttonText);
 
                     String data = firstNameTxt + "\n" + lastNameTxt + "\n" + genderText + "\n" + buttonText;
-                    Log.d("test3", data);
+                    //Log.d("test3", data);
                     //save the data
                     writeToFile(data);
 

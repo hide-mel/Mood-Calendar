@@ -58,6 +58,18 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
         setMonthView();
 
+        view.findViewById(R.id.calendar_backward).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                previousMonthAction(view);
+            }
+        });
+        view.findViewById(R.id.calendar_forward).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nextMonthAction(view);
+            }
+        });
 
         return view;
 

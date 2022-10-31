@@ -32,34 +32,39 @@ public class EmotionResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emotion_res);
         initialize();
-
         // get ViewModel from intent
         StaticLiveData s = StaticLiveData.getInstance();
         // observer
         final Observer<Map<String,String>> resObserver = new Observer<Map<String, String>>() {
             @Override
             public void onChanged(Map<String, String> stringStringMap) {
-                // hide progress bar
-                if (stringStringMap != null){
-                    if (p != null){
+                // decide if livedata is null to prevent redundant rendering
+                if (stringStringMap != null) {
+                    if (p != null) {
                         p.setVisibility(View.GONE);
                     }
                     Log.e("observer", "onChanged: " + "onchange启动");
                     // set result
                     String emotion = stringStringMap.get("emotion");
-                    if (tRes != null){
-                        tRes.setText(emotion);
-                    }
-                    if (emotion.equals("More than one face detected") && icon != null){
+
+                    if (emotion == null) {
+                        emotion = "NOT HUMAN";
+                        p.setVisibility(View.GONE);
+                        icon.setBackgroundResource(R.drawable.smile_face);
+                        icon.setVisibility(View.VISIBLE);
+                    } else if (emotion.equals("More than one face detected") && icon != null) {
                         //TODO: set icon of unknown
-                    }else{
+                    } else {
                         String conf = stringStringMap.get("confidence");
-                        if (tConf != null){
+                        if (tConf != null) {
                             tConf.setText("Confidence: " + conf + "%");
                         }
                         icon.setBackgroundResource(R.drawable.smile_face);
                         p.setVisibility(View.GONE);
                         icon.setVisibility(View.VISIBLE);
+                    }
+                    if (tRes != null) {
+                        tRes.setText(emotion);
                     }
                     s.setValue(null);
                 }

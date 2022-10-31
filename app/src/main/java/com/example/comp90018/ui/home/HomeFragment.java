@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.FaceDetector;
 import android.net.Uri;
 import android.os.Build;
@@ -17,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -57,6 +60,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private Uri imageUri;
     private Activity activity;
     private HomeViewModel model;
+    private ImageView icon;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -65,6 +69,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mode = "selfie";
         selfie = root.findViewById(R.id.selfie_button);
         selfie.setOnClickListener(this);
+        icon = root.findViewById(R.id.home_icon);
 
         photo = root.findViewById(R.id.photo_button);
         photo.setOnClickListener(this);
@@ -94,6 +99,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         root.getContext(),
                         R.drawable.color_blank_button) );
                 mode = "selfie";
+                icon.setBackgroundResource(R.drawable.smile_face);
                 break;
             case R.id.photo_button:
                 photo.setBackground(ContextCompat.getDrawable(
@@ -106,6 +112,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         root.getContext(),
                         R.drawable.color_blank_button) );
                 mode = "photo";
+
+                icon.setBackgroundResource(R.drawable.gallery_icon);
                 break;
             case R.id.manual_button:
                 manual.setBackground(ContextCompat.getDrawable(
@@ -118,6 +126,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         root.getContext(),
                         R.drawable.color_blank_button) );
                 mode = "manual";
+                icon.setBackgroundResource(R.drawable.profile_icon);
                 break;
 
             case R.id.continue_button:

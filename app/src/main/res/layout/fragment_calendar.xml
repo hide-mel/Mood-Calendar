@@ -19,6 +19,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp">
         <Button
+            android:id="@+id/calendar_backward"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -39,6 +40,7 @@
             android:textColor="@color/colorTextPrimary"/>
 
         <Button
+            android:id="@+id/calendar_forward"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

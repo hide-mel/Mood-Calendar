@@ -30,10 +30,7 @@ public class EmotionResultActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emotion_res);
-
-
         initialize();
-
         // get ViewModel from intent
         StaticLiveData s = StaticLiveData.getInstance();
         // observer
@@ -47,10 +44,13 @@ public class EmotionResultActivity extends AppCompatActivity {
 
                 // set result
                 String emotion = stringStringMap.get("emotion");
-                if (tRes != null){
-                    tRes.setText(emotion);
-                }
-                if (emotion.equals("More than one face detected") && icon != null){
+
+                if (emotion == null){
+                    emotion = "NOT HUMAN";
+                    p.setVisibility(View.GONE);
+                    icon.setBackgroundResource(R.drawable.smile_face);
+                    icon.setVisibility(View.VISIBLE);
+                } else if (emotion.equals("More than one face detected") && icon != null){
                     //TODO: set icon of unknown
                 }else{
                     String conf = stringStringMap.get("confidence");
@@ -61,8 +61,9 @@ public class EmotionResultActivity extends AppCompatActivity {
                     p.setVisibility(View.GONE);
                     icon.setVisibility(View.VISIBLE);
                 }
-
-
+                if (tRes != null){
+                    tRes.setText(emotion);
+                }
             }
         };
 

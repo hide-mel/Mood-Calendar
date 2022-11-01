@@ -132,7 +132,7 @@ public class UserAct extends AppCompatActivity
 //                Toast.makeText(context,activities,Toast.LENGTH_LONG).show();
 
                 //TODO adding data to databse
-                //activities -> activities
+                //activities -> activities.toString()
                 //emotion -> selected_mood
 
 
@@ -157,6 +157,7 @@ public class UserAct extends AppCompatActivity
             mood.setVisibility(View.GONE);
             selected_mood = intent.getStringExtra("emotion");
         } else {
+            Mood.initmood();
             Spinner spinner_mood = findViewById(R.id.mood_spinner);
             spinner_mood.setAdapter(new MoodAdapter(this, R.layout.custom_spinner_adapter, Mood.getUserArrayList()));
             spinner_mood.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -177,6 +178,8 @@ public class UserAct extends AppCompatActivity
     private void initial_spinners() {
         Social.initSocial();
         Hobbies.initHobbies();
+        Food.initfood();
+        Weather.initweather();
 
         Spinner spinner_social =  findViewById(R.id.spinner1);
         Spinner spinner_hobbies = findViewById(R.id.spinner2);

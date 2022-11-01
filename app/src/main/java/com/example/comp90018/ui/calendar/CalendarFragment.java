@@ -97,9 +97,11 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         monthYearText.setText(monthYearFromDate(selectedDate));
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
 
+
         String year = String.valueOf(selectedDate.getYear());
         String month = String.valueOf(selectedDate.getMonthValue());
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this, this.getActivity(), year, month);
+
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(view.getContext(), 7);
 
         calendarRecyclerView.setLayoutManager(layoutManager);

@@ -7,7 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 //import android.support.v7.app.AppCompatActivity;
 
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +39,10 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     private Button dateButton;
     ImageButton logIn;
 
+    private SharedPreferences sp;
+    private SharedPreferences.Editor editor;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +50,35 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
         //check if the file exists
         File dir = new File(getApplicationContext().getFilesDir(), "config.txt");
-        if(dir.exists()){
-            startActivity(new Intent(LoginPage.this, MainActivity.class));
-        }
 
-        //gender spinner
+//        if(dir.exists()){
+//            Log.e("TAG", "onCreate: "+getApplicationContext().getFilesDir() );
+//            startActivity(new Intent(LoginPage.this, MainActivity.class));
+//        } else{
+//            //gender spinner
+//            sp = this.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+//            editor = sp.edit();
+//
+//            Spinner spinner = findViewById(R.id.gender_spinner);
+//            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender, android.R.layout.simple_spinner_item);
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//            spinner.setAdapter(adapter);
+//            spinner.setOnItemSelectedListener(this);
+//
+//            //birthday datepicker
+//            initDatePicker();
+//            dateButton = findViewById(R.id.birthday);
+//            dateButton.setText(getTodaysDate());
+//
+//            //img button
+//            //super.onCreate(savedInstanceState);
+//            //setContentView(R.layout.activity_login_page2);
+//            logIn =(ImageButton)findViewById(R.id.imageButton5);
+//            logIn.setOnClickListener(this);
+        sp = this.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        editor = sp.edit();
+
+
         Spinner spinner = findViewById(R.id.gender_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -85,6 +117,8 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                 month = month+1;
                 String date = makeDateString(day,month,year);
                 dateButton.setText(date);
+                editor.putString("DOB",date);
+                editor.commit();
             }
         };
 
@@ -99,7 +133,8 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     }
 
     private String makeDateString(int day, int month, int year) {
-        return getMonthFormat(month) + " " + day + " " + year;
+//        return getMonthFormat(month) + " " + day + " " + year;
+        return day+"/"+(++month)+"/"+year;
     }
 
     private String getMonthFormat(int month) {
@@ -155,14 +190,19 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                     TextInputEditText firstName = (TextInputEditText)findViewById(R.id.firstName);
                     //Log.d("test", "abc");
                     String firstNameTxt = Objects.requireNonNull(firstName.getText()).toString();
+
+                    editor.putString("first_name",firstNameTxt);
                     //Log.d("test", "abcd");
                     TextInputEditText lastName = findViewById(R.id.lastName);
                     String lastNameTxt = Objects.requireNonNull(lastName.getText()).toString();
+                    editor.putString("last_name",lastNameTxt);
                     //Log.d("test1", firstNameTxt);
                     Spinner spinner = (Spinner)findViewById(R.id.gender_spinner);
                     String genderText = spinner.getSelectedItem().toString();
-
                     String buttonText = dateButton.getText().toString();
+                    editor.putString("gender",genderText);
+                    editor.commit();
+
                     //Log.d("test1", firstNameTxt);
                     //Log.d("test1", lastNameTxt);
                     //Log.d("test1", genderText);

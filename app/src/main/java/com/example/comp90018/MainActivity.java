@@ -38,6 +38,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         SharedPreferences sp = getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        Log.e("TAG", "onCreate: aaaaaa"+ sp.getBoolean("did_login",false));
+
+        if (!sp.getBoolean("did_login",false)){
+            startActivity(new Intent(MainActivity.this, LoginPage.class));
+//            SharedPreferences.Editor editor = sp.edit();
+            editor.putBoolean("did_login",true);
+            editor.commit();
+        }
+
         if (sp.getBoolean("night_mode",false)) {
             AppCompatDelegate.setDefaultNightMode((AppCompatDelegate.MODE_NIGHT_YES));
         }

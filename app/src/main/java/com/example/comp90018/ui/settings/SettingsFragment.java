@@ -7,6 +7,9 @@ import android.os.Bundle;
 //
 //import android.support.v4.app.Fragment;
 //import android.support.v7.app.AppCompatDelegate;
+
+import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,11 +124,13 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked){
+                    Log.e("switch", "onCheckedChanged: open night modeeeeeeeeeeeeeeeeee" );
                     AppCompatDelegate.setDefaultNightMode((AppCompatDelegate.MODE_NIGHT_YES));
                     editor.putBoolean("night_mode",true);
                     editor.commit();
                     restartCurrentActivity();
                 } else {
+                    Log.e("switch", "onCheckedChanged: offfffffffffffffffffffffff" );
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     editor.putBoolean("night_mode",false);
                     editor.commit();

@@ -1,5 +1,6 @@
 package com.example.comp90018.ui.home;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.comp90018.R;
+import com.example.comp90018.ui.activity.UserAct;
 
 import java.util.Map;
 
@@ -102,6 +104,18 @@ public class EmotionResultActivity extends AppCompatActivity {
 
         // start observation
         s.observe(this,resObserver);
+
+        // click listener
+        findViewById(R.id.emo_res_continue).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pressBtn();
+            }
+        });
+    }
+
+    private void pressBtn() {
+        startActivity(new Intent(this, UserAct.class));
     }
 
     /**

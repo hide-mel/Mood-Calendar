@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Activity"
+        android:textSize="40sp"
+        android:layout_gravity="center"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,6 +32,7 @@
             android:textAlignment="textEnd"/>
 
         <Spinner
+
             android:layout_width="0dp"
             android:layout_weight="7"
             android:layout_height="80dp"

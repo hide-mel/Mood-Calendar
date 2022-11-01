@@ -1,15 +1,17 @@
 package com.example.comp90018.ui.activity;
 
+import com.example.comp90018.R;
+
 import java.util.ArrayList;
 
-public class User
+public class Social
 {
-    private static ArrayList<User> userArrayList = new ArrayList<>();
+    private static ArrayList<Social> userArrayList = new ArrayList<>();
 
     private String id;
     private String name;
 
-    public User(String id, String name)
+    public Social(String id, String name)
     {
         this.id = id;
         this.name = name;
@@ -31,18 +33,18 @@ public class User
         this.name = name;
     }
 
-    public static void initUsers()
+    public static void initSocial()
     {
-        User user1 = new User("0", "Family");
+        Social user1 = new Social("0", "Family");
         userArrayList.add(user1);
 
-        User user2 = new User("1", "Friends");
+        Social user2 = new Social("1", "Friends");
         userArrayList.add(user2);
 
-        User user3 = new User("2", "Date");
+        Social user3 = new Social("2", "Date");
         userArrayList.add(user3);
 
-        User user4 = new User("3", "Party");
+        Social user4 = new Social("3", "Party");
         userArrayList.add(user4);
 
     }
@@ -56,18 +58,18 @@ public class User
             case "1":
                 return R.drawable.usericon1;
             case "2":
-                return R.drawable.usericon2;
+                return R.drawable.usericon0;
             case "3":
-                return R.drawable.usericon3;
+                return R.drawable.usericon0;
             case "4":
-                return R.drawable.usericon4;
+                return R.drawable.usericon0;
             case "5":
-                return R.drawable.usericon5;
+                return R.drawable.usericon0;
         }
         return R.drawable.usericon0;
     }
 
-    public static ArrayList<User> getUserArrayList()
+    public static ArrayList<Social> getUserArrayList()
     {
         return userArrayList;
     }

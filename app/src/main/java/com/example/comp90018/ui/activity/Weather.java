@@ -4,14 +4,14 @@ import com.example.comp90018.R;
 
 import java.util.ArrayList;
 
-public class Hobbies
+public class Weather
 {
-    private static ArrayList<Hobbies> userArrayList = new ArrayList<>();
+    private static ArrayList<Weather> userArrayList = new ArrayList<>();
 
     private String id;
     private String name;
 
-    public Hobbies(String id, String name)
+    public Weather(String id, String name)
     {
         this.id = id;
         this.name = name;
@@ -35,16 +35,16 @@ public class Hobbies
 
     public static void initHobbies()
     {
-        Hobbies hobbies1 = new Hobbies("0", "Family");
+        Weather hobbies1 = new Weather("0", "Family");
         userArrayList.add(hobbies1);
 
-        Hobbies hobbies2 = new Hobbies("1", "Friends");
+        Weather hobbies2 = new Weather("1", "Friends");
         userArrayList.add(hobbies2);
 
-        Hobbies hobbies3 = new Hobbies("2", "Date");
+        Weather hobbies3 = new Weather("2", "Date");
         userArrayList.add(hobbies3);
 
-        Hobbies hobbies4 = new Hobbies("3", "Party");
+        Weather hobbies4 = new Weather("3", "Party");
         userArrayList.add(hobbies4);
 
     }
@@ -69,7 +69,7 @@ public class Hobbies
         return R.drawable.usericon0;
     }
 
-    public static ArrayList<Hobbies> getUserArrayList()
+    public static ArrayList<Weather> getUserArrayList()
     {
         return userArrayList;
     }

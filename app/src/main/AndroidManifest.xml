@@ -55,6 +55,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.comp90018.ui.home.EmotionResultActivity" />
+        <activity android:name="com.example.comp90018.ui.activity.UserAct" />
 
 
     </application>

@@ -183,11 +183,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             thread.start();
         }
 
-        // call emotion result ui
-        Intent intent = new Intent(this.getActivity().getBaseContext(), EmotionResultActivity.class);
-        intent.putExtra("path",finalPath);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-        startActivity(intent);
+        if (data != null){
+            // call emotion result ui
+            Intent intent = new Intent(this.getActivity().getBaseContext(), EmotionResultActivity.class);
+            intent.putExtra("path",finalPath);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+            startActivity(intent);
+        }
+
 
 
 //        File file = new File("~/.aws/credentials");

@@ -29,6 +29,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.comp90018.R;
+import com.example.comp90018.database.RoomDB;
+import com.example.comp90018.database.User;
 import com.example.comp90018.databinding.FragmentCalendarBinding;
 
 import java.time.LocalDate;
@@ -46,6 +48,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     private RecyclerView calendarRecyclerView;
     private TextView monthYearText;
     private LocalDate selectedDate;
+    private RoomDB roomDB;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -90,10 +93,13 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
 
     private void setMonthView()
     {
+        // set calendar title of month-year
         monthYearText.setText(monthYearFromDate(selectedDate));
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
 
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
+        String year = String.valueOf(selectedDate.getYear());
+        String month = String.valueOf(selectedDate.getMonthValue());
+        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this, this.getActivity(), year, month);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(view.getContext(), 7);
 
         calendarRecyclerView.setLayoutManager(layoutManager);
@@ -151,5 +157,15 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
             Toast.makeText(view.getContext(), message, Toast.LENGTH_LONG).show();
 
         }
+
+        //TODO: delete following code
+        User user = new User();
+        user.setDay(String.valueOf(LocalDate.now().getDayOfMonth()));
+        user.setMonth(String.valueOf(LocalDate.now().getMonthValue()));
+        user.setYear(String.valueOf(LocalDate.now().getYear()));
+        user.setEmotion("HAPPY");
+        user.setActivity("");
+        roomDB = RoomDB.getInstance(getActivity());
+        roomDB.userDao().insert(user);
     }
 }

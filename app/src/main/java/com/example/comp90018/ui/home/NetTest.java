@@ -15,6 +15,9 @@ public class NetTest {
         BufferedReader buffer = null;
         StringBuffer resultBuffer = null;
 
+        coordinate = "-33.7,127";
+        urlParam = "http://api.positionstack.com/v1/reverse?access_key=5314a6050cd7bd68eb2ebcc6c6200bfd&query=";
+
         try{
             // prepare the params and send request
             urlParam += coordinate;

@@ -1,7 +1,8 @@
-package com.example.comp90018;
+package com.example.comp90018.ui.home;
 
 import android.Manifest;
-import android.content.ContentResolver;
+import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -9,8 +10,9 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +21,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.example.comp90018.ui.home.NetTest;
+import com.example.comp90018.R;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,7 +45,7 @@ public class AddingActivities extends AppCompatActivity {
     private String TAG = "LOCATION";
     private int Request_Code_Location = 22;
     private LocationManager locationManager;
-//    final ContentResolver cr = getContentResolver();
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +53,7 @@ public class AddingActivities extends AppCompatActivity {
         setContentView(R.layout.activity_adding_activities);
 
         get_location = findViewById(R.id.get_location);
+
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         get_location.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +67,6 @@ public class AddingActivities extends AppCompatActivity {
     public void locationUpdates() {
 
         if (ActivityCompat.checkSelfPermission(AddingActivities.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Log.e(TAG, "locationUpdates: get permission" );
             locationManager.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER,
                     5000,
@@ -75,78 +83,77 @@ public class AddingActivities extends AppCompatActivity {
                 @Override
                 public void run(){
                     if (location != null) {
-                        Log.e(TAG, "run: new thread" );
+                        Log.e(TAG, "run: lat: "+location.getLatitude() );
+                        Log.e(TAG, "run: lon: "+location.getLongitude() );
+                        double lat = location.getLatitude();
+                        double lon = location.getLongitude();
+
                         Geocoder geocoder = new Geocoder(AddingActivities.this, Locale.getDefault());
 //                        if (Settings.System.getString(cr,Settings.System.AIRPLANE_MODE_ON))
-                        try {
-                            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-                            if (addresses.size() > 0)
-                                Log.e(TAG, "run: address size "+addresses.size() );
-                        } catch (IOException e) {
-                            Log.e(TAG, "run: error");
-                            e.printStackTrace();
-                        }
-                        String lat = String.valueOf(location.getLatitude());
-                        String lon = String.valueOf(location.getLongitude());
-                        String url = "http://api.positionstack.com/v1/reverse?access_key=5314a6050cd7bd68eb2ebcc6c6200bfd&query=";
-                        Log.e(TAG, "run: URL "+ sendRequest(url,"-33.7,127") );
-//                        System.out.println(sendRequest(url,"-33.7,127"));
+//                        try {
+////                            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+////                            List<Address> addresses = geocoder.getFromLocation(-37.796,144.961,1);
+//                            List<Address> addresses = geocoder.getFromLocation(lat,lon,1);
+//
+//
+//                            if (addresses.size() > 0)
+//                                Log.e(TAG, "run: address size "+addresses.size() );
+//                        } catch (IOException e) {
+//                            Log.e(TAG, "run: error");
+//                            e.printStackTrace();
+//                        }
+
+//                        String url = "http://api.positionstack.com/v1/reverse?access_key=d39bd4087a1b7d31704a64cd216d6d59&query=";
+
+                        String address = getAddress(sendRequest(lat,lon));
+                        Log.e(TAG, "run: address from location: "+address );
+
+
 
                     }
                 }
             }.start();
-            Log.e(TAG, "locationUpdates: main thread");
 
 
         } else {
-//            37.421998333333335
-//            -122.084
             ActivityCompat.requestPermissions(AddingActivities.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Request_Code_Location);
 
         }
     }
 
-    private void setAirPlaneMode(boolean enable) {
-        int mode = enable ? 1 : 0;
-        String cmd = "settings put global airplane_mode_on " + mode;
-        try {
-            Runtime.getRuntime().exec(cmd);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-    public String sendRequest(String urlParam,String coordinate){
-        HttpURLConnection con = null;
+    public String sendRequest(double lat, double lon){
         BufferedReader buffer = null;
         StringBuffer resultBuffer = null;
 
         try{
-            // prepare the params and send request
-            urlParam += coordinate;
-            URL url = new URL(urlParam);
-            con = (HttpURLConnection) url.openConnection();
-            con.setConnectTimeout(5000);
-            con.setReadTimeout(5000);
-            con.setRequestMethod("GET");
-            con.setRequestProperty("Content-Type","application/json");
-            con.setDoOutput(true);
 
+//            URL url = new URL("http://api.positionstack.com/v1/reverse?access_key=d39bd4087a1b7d31704a64cd216d6d59&query=-37.796,144.961");
+//            con = (HttpURLConnection) url.openConnection();
+//            con.setConnectTimeout(5000);
+//            con.setReadTimeout(5000);
+//            con.setRequestMethod("POST");
+//            con.setRequestProperty("Content-Type","application/json");
+//            con.setDoOutput(true);
+            String url_string = "https://api.geoapify.com/v1/geocode/reverse?lat=";
+            url_string = url_string+lat+"&lon="+lon+"&apiKey=90170e1139804ff49131facc23c3139f";
+            URL url = new URL(url_string);
 
-            System.out.println("message out");
-            System.out.println( con.getURL().getPath());
+            HttpURLConnection http = (HttpURLConnection)url.openConnection();
+            http.setRequestProperty("Accept", "application/json");
 
-            // receive response
-            int responseCode = con.getResponseCode();
-            System.out.println(responseCode);
+            int responseCode = http.getResponseCode();
+//            System.out.println(responseCode);
             if (responseCode == 200){
-                InputStream is = con.getInputStream();
+                InputStream is = http.getInputStream();
+
                 resultBuffer = new StringBuffer();
                 String line;
                 buffer = new BufferedReader(new InputStreamReader(is,"UTF-8"));
                 while ((line = buffer.readLine()) != null){
                     resultBuffer.append(line);
                 }
+                http.disconnect();
                 return resultBuffer.toString();
             }
 
@@ -158,40 +165,27 @@ public class AddingActivities extends AppCompatActivity {
         return "";
     }
 
-
-    private Address getLocationAddress(Context context, double latitude, double longitude) {
-        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+    private String getAddress(String json){
+        StringBuilder address = new StringBuilder();
         try {
-            List<Address> addresses = geocoder.getFromLocation(latitude,longitude,1);
-            if (addresses.size() > 0)
-                return addresses.get(0);
-        } catch (IOException e) {
+            JSONObject jsonObject = new JSONObject(json);;
+            JSONObject properties = jsonObject.getJSONArray("features")
+                    .getJSONObject(0).getJSONObject("properties");
+            address.append(properties.get("street"));
+            address.append(",");
+            address.append(properties.get("suburb"));
+            address.append(",");
+            address.append(properties.get("city"));
+            return address.toString();
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return null;
+    };
 
-//        if (location!=null) {
-//            Double lat = location.getLatitude();
-//            Double lon = location.getLongitude();
-//            Log.e("Location", "locationUpdates: getLatitude "+location.getLatitude());
-//            Log.e("Location", "locationUpdates: getLongitude "+location.getLongitude());
-////            Geocoder geocoder = new Geocoder(this, Locale.ENGLISH);
-//            try {
-//                List<Address> addresses = geocoder.getFromLocation(lat,lon,1);
-//                Log.e(TAG, "locationUpdates: "+addresses.size() );
-////                    for (Address address : addresses){
-////                        Log.e(TAG, "locationUpdatesssss: "+address );
-////                    }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            Log.e(TAG, "locationUpdates: lllocation" );
-//
-//
-//        }else {
-//            Log.e("Locaiton", "locationUpdates: NO location" );
-//        }
-    }
+
+
+
 
 
 
@@ -205,3 +199,5 @@ public class AddingActivities extends AppCompatActivity {
         }
     }
 }
+
+

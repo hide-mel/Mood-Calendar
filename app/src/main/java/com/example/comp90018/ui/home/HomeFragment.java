@@ -1,5 +1,6 @@
 package com.example.comp90018.ui.home;
 
+
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Intent;
@@ -9,6 +10,9 @@ import android.graphics.BitmapFactory;
 import android.media.FaceDetector;
 import android.net.Uri;
 import android.os.Build;
+
+import android.content.Intent;
+
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -23,13 +27,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.comp90018.R;
 import com.example.comp90018.databinding.FragmentHomeBinding;
@@ -59,13 +63,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private File tempFile;
     private Uri imageUri;
     private Activity activity;
-    private HomeViewModel model;
+//    private HomeViewModel model;
     private ImageView icon;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(layout,container,false);
-        model = new ViewModelProvider(this).get(HomeViewModel.class);
+//        model = new ViewModelProvider(this).get(HomeViewModel.class);
         mode = "selfie";
         selfie = root.findViewById(R.id.selfie_button);
         selfie.setOnClickListener(this);
@@ -75,9 +79,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         photo.setOnClickListener(this);
         manual = root.findViewById(R.id.manual_button);
         manual.setOnClickListener(this);
+
         cont = root.findViewById(R.id.continue_button);
         cont.setOnClickListener(this);
         activity = (Activity) root.getContext();
+
+
+//        Button botton = root.findViewById((R.id.button));
+//        botton.setOnClickListener(this);
+
         return root;
 
 
@@ -128,6 +138,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 mode = "manual";
                 icon.setBackgroundResource(R.drawable.profile_icon);
                 break;
+
+//            case R.id.button:
+//                Intent intent = new Intent(view.getContext(), AddingActivities.class);
+//                view.getContext().startActivity(intent);
+//                break;
 
             case R.id.continue_button:
                 if (mode.equals("selfie")){

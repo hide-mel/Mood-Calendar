@@ -17,5 +17,6 @@
 
     <!--    <color name="colorBackground">#000000</color>-->
     <color name="colorTextPrimary">#FFFFFF</color>
+    <color name="editText_backround">#3E3F42</color>
 <!--    <color name="colorTextSecondary">#BDBDBD</color>-->
 </resources>

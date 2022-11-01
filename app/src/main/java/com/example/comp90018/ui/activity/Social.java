@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Social
 {
-    private static ArrayList<Social> userArrayList = new ArrayList<>();
+    private static ArrayList<Social> userArrayList;
 
     private String id;
     private String name;
@@ -35,6 +35,7 @@ public class Social
 
     public static void initSocial()
     {
+        userArrayList = new ArrayList<>();
         Social user1 = new Social("0", "Family");
         userArrayList.add(user1);
 

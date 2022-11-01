@@ -33,8 +33,9 @@ public class Weather
         this.name = name;
     }
 
-    public static void initHobbies()
+    public static void initweather()
     {
+        userArrayList = new ArrayList<>();
         Weather hobbies1 = new Weather("0", "Family");
         userArrayList.add(hobbies1);
 

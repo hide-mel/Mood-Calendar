@@ -8,9 +8,12 @@
         <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018-main/app/src/main/res/layout/fragment_article_item.xml" value="0.1766304347826087" />
         <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018-main/app/src/main/res/layout/fragment_article_recycler.xml" value="0.1766304347826087" />
         <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018-main/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+        <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/drawable-night/ic_baseline_location_off_24.xml" value="0.1" />
+        <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/drawable-night/ic_baseline_location_on_24.xml" value="0.1" />
         <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/drawable-night/ic_baseline_person_24.xml" value="0.2035" />
         <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/drawable-night/ic_baseline_person_d24.xml" value="0.2035" />
         <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.1" />
         <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1" />
         <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1" />
         <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/layout/activity_adding_activities.xml" value="0.1" />
@@ -19,8 +22,8 @@
         <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/layout/custom_spinner_adapter.xml" value="0.14114583333333333" />
         <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/layout/date_picker.xml" value="0.264" />
         <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/layout/fragment_calendar.xml" value="0.1390625" />
-        <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/layout/fragment_settings.xml" value="0.1" />
-        <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/layout/spinner_activity.xml" value="0.1109375" />
+        <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/layout/fragment_settings.xml" value="0.2" />
+        <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/layout/spinner_activity.xml" value="0.2" />
         <entry key="..\:/s/Master/2-2/COMP90018 Mobile Computing Systems Programming/project 2/COMP90018/app/src/main/res/layout/spinner_item.xml" value="0.1" />
       </map>
     </option>

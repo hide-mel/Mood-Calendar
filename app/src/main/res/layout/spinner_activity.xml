@@ -1,122 +1,309 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:layout_width="match_parent">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Activity"
-        android:textSize="40sp"
-        android:layout_gravity="center"/>
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="match_parent"
-            android:text="Socail:"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:textAlignment="textEnd"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activity"
+            android:textSize="30sp"
+            android:textColor="@color/colorTextPrimary"
+            android:layout_gravity="center"/>
 
-        <Spinner
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            android:layout_width="0dp"
-            android:layout_weight="7"
-            android:layout_height="80dp"
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="match_parent"
+                android:text="Socail:"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="25sp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center" />
+
+            <Spinner
+
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:spinnerMode="dropdown"
+                android:id="@+id/spinner1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="match_parent"
+                android:text="Hobbies:"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="25sp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                />
+
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:spinnerMode="dropdown"
+                android:id="@+id/spinner2"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="match_parent"
+                android:text="Food:"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="25sp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"/>
+
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:spinnerMode="dropdown"
+                android:id="@+id/spinner3"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="match_parent"
+                android:text="Weather:"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="25sp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"/>
+
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:spinnerMode="dropdown"
+                android:id="@+id/spinner4"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/underlinePrimary"
+            android:layout_marginBottom="18dp"
+            android:layout_marginHorizontal="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:textSize="30sp"
+            android:textColor="@color/colorTextPrimary"
             android:gravity="center"
-            android:spinnerMode="dropdown"
-            android:id="@+id/spinner1"/>
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/get_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_baseline_location_on_24"
+                    android:text="get location"
+                    android:gravity="center"
+                    android:layout_gravity="center" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/clean_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_baseline_location_off_24"
+                    android:text="clean location"
+                    android:gravity="center"
+                    android:layout_gravity="center" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp">
+
+            <TextView
+                android:id="@+id/show_locaiton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="25sp"
+                android:textColor="@color/colorTextPrimary"
+                android:hint="get your location~"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/underlinePrimary"
+            android:layout_marginBottom="18dp"
+            android:layout_marginHorizontal="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible"
+            android:id="@+id/mood_selector">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mood"
+                android:textSize="30sp"
+                android:textColor="@color/colorTextPrimary"
+                android:gravity="center"
+                android:layout_gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="match_parent"
+                    android:text="Mood:"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="25sp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center" />
+
+                <Spinner
+
+                    android:layout_width="0dp"
+                    android:layout_weight="7"
+                    android:layout_height="80dp"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown"
+                    android:id="@+id/mood_spinner"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/underlinePrimary"
+            android:layout_marginBottom="18dp"
+            android:layout_marginHorizontal="10dp"/>
+
+        <EditText
+            android:id="@+id/feeling_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="4"
+            android:hint="say something about today..."
+            android:layout_marginHorizontal="10dp"
+            android:padding="5dp"
+            android:background="@color/editText_backround"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp">
+
+            <Button
+                android:id="@+id/add_activity_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="36dp"
+                android:gravity="center"
+                android:text="cancel"
+                app:layout_constraintEnd_toStartOf="@+id/add_activity_confirm"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/add_activity_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="36dp"
+                android:gravity="center"
+                android:text="confirm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="match_parent"
-            android:text="Hobbies:"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:textAlignment="textEnd"/>
-
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_weight="7"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:spinnerMode="dropdown"
-            android:id="@+id/spinner2"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="match_parent"
-            android:text="Food:"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:textAlignment="textEnd"/>
-
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_weight="7"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:spinnerMode="dropdown"
-            android:id="@+id/spinner3"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="match_parent"
-            android:text="Weather:"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:textAlignment="textEnd"/>
-
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_weight="7"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:spinnerMode="dropdown"
-            android:id="@+id/spinner4"/>
-    </LinearLayout>
+</ScrollView>
 
 
 
-</LinearLayout>
+
+
+
+

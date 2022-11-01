@@ -20,7 +20,7 @@
         android:layout_height="30dp"
         android:text="Cal"
         android:layout_marginLeft="20dp"
-        android:textColor="@color/black"
+        android:textColor="@color/colorTextPrimary"
         android:textSize="20sp"
         android:layout_gravity="center_vertical"
         android:id="@+id/nameTextView"/>

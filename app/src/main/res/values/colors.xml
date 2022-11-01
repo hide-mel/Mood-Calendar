@@ -14,5 +14,6 @@
     <color name="underlinePrimary">#FF000000</color>
     <color name="itemIconTint">#FF6200EE</color>
     <color name="colorTextPrimary">#212121</color>
+    <color name="editText_backround">#E4E6EA</color>
 
 </resources>

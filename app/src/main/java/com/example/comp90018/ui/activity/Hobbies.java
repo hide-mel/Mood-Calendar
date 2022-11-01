@@ -35,6 +35,7 @@ public class Hobbies
 
     public static void initHobbies()
     {
+        userArrayList = new ArrayList<>();
         Hobbies hobbies1 = new Hobbies("0", "Family");
         userArrayList.add(hobbies1);
 

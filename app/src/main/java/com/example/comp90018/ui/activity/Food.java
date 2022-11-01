@@ -33,8 +33,9 @@ public class Food
         this.name = name;
     }
 
-    public static void initHobbies()
+    public static void initfood()
     {
+        userArrayList = new ArrayList<>();
         Food hobbies1 = new Food("0", "Family");
         userArrayList.add(hobbies1);
 

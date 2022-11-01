@@ -54,6 +54,9 @@ android {
 }
 
 dependencies {
+    annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    implementation 'com.google.android.material:material:1.1.0'
     implementation 'software.amazon.awssdk:rekognition:2.17.230'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'

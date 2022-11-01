@@ -7,11 +7,13 @@
 
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/cellDayText"
         android:text="1"
-        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textSize="33sp"
+        android:gravity="center"
         android:textColor="@color/colorTextPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"

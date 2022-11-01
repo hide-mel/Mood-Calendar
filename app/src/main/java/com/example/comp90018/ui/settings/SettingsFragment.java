@@ -1,13 +1,13 @@
 package com.example.comp90018.ui.settings;
-
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatDelegate;
+//
+//import android.support.v4.app.Fragment;
+//import android.support.v7.app.AppCompatDelegate;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +20,9 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.fragment.app.Fragment;
 
 import com.example.comp90018.R;
 
@@ -119,11 +122,13 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked){
+                    Log.e("switch", "onCheckedChanged: open night modeeeeeeeeeeeeeeeeee" );
                     AppCompatDelegate.setDefaultNightMode((AppCompatDelegate.MODE_NIGHT_YES));
                     editor.putBoolean("night_mode",true);
                     editor.commit();
                     restartCurrentActivity();
                 } else {
+                    Log.e("switch", "onCheckedChanged: offfffffffffffffffffffffff" );
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     editor.putBoolean("night_mode",false);
                     editor.commit();

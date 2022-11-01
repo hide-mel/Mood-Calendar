@@ -2,29 +2,77 @@ package com.example.comp90018;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+//import android.support.v7.app.AppCompatActivity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.Calendar;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
-public class LoginPage extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Calendar;
+import java.util.Objects;
+
+public class LoginPage extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
+    ImageButton logIn;
+    private SharedPreferences sp;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page2);
 
-        //gender spinner
+        //check if the file exists
+        File dir = new File(getApplicationContext().getFilesDir(), "config.txt");
+//        if(dir.exists()){
+//            Log.e("TAG", "onCreate: "+getApplicationContext().getFilesDir() );
+//            startActivity(new Intent(LoginPage.this, MainActivity.class));
+//        } else{
+//            //gender spinner
+//            sp = this.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+//            editor = sp.edit();
+//
+//            Spinner spinner = findViewById(R.id.gender_spinner);
+//            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender, android.R.layout.simple_spinner_item);
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//            spinner.setAdapter(adapter);
+//            spinner.setOnItemSelectedListener(this);
+//
+//            //birthday datepicker
+//            initDatePicker();
+//            dateButton = findViewById(R.id.birthday);
+//            dateButton.setText(getTodaysDate());
+//
+//            //img button
+//            //super.onCreate(savedInstanceState);
+//            //setContentView(R.layout.activity_login_page2);
+//            logIn =(ImageButton)findViewById(R.id.imageButton5);
+//            logIn.setOnClickListener(this);
+        sp = this.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        editor = sp.edit();
+
         Spinner spinner = findViewById(R.id.gender_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -35,6 +83,15 @@ public class LoginPage extends AppCompatActivity implements AdapterView.OnItemSe
         initDatePicker();
         dateButton = findViewById(R.id.birthday);
         dateButton.setText(getTodaysDate());
+
+        //img button
+        //super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_login_page2);
+        logIn =(ImageButton)findViewById(R.id.imageButton5);
+        logIn.setOnClickListener(this);
+
+
+
     }
 
     //gender spinner
@@ -57,6 +114,8 @@ public class LoginPage extends AppCompatActivity implements AdapterView.OnItemSe
                 month = month+1;
                 String date = makeDateString(day,month,year);
                 dateButton.setText(date);
+                editor.putString("DOB",date);
+                editor.commit();
             }
         };
 
@@ -71,7 +130,8 @@ public class LoginPage extends AppCompatActivity implements AdapterView.OnItemSe
     }
 
     private String makeDateString(int day, int month, int year) {
-        return getMonthFormat(month) + " " + day + " " + year;
+//        return getMonthFormat(month) + " " + day + " " + year;
+        return day+"/"+(++month)+"/"+year;
     }
 
     private String getMonthFormat(int month) {
@@ -114,5 +174,64 @@ public class LoginPage extends AppCompatActivity implements AdapterView.OnItemSe
 
     public void openDatePicker(View view) {
         datePickerDialog.show();
+    }
+
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imageButton5:
+                try {
+                    //get text from text boxes
+                    TextInputEditText firstName = (TextInputEditText)findViewById(R.id.firstName);
+                    //Log.d("test", "abc");
+                    String firstNameTxt = Objects.requireNonNull(firstName.getText()).toString();
+                    editor.putString("first_name",firstNameTxt);
+                    //Log.d("test", "abcd");
+                    TextInputEditText lastName = findViewById(R.id.lastName);
+                    String lastNameTxt = Objects.requireNonNull(lastName.getText()).toString();
+                    editor.putString("last_name",lastNameTxt);
+                    //Log.d("test1", firstNameTxt);
+                    Spinner spinner = (Spinner)findViewById(R.id.gender_spinner);
+                    String genderText = spinner.getSelectedItem().toString();
+                    String buttonText = dateButton.getText().toString();
+                    editor.putString("gender",genderText);
+                    editor.commit();
+                    //Log.d("test1", firstNameTxt);
+                    //Log.d("test1", lastNameTxt);
+                    //Log.d("test1", genderText);
+                    //Log.d("test1", buttonText);
+
+                    String data = firstNameTxt + "\n" + lastNameTxt + "\n" + genderText + "\n" + buttonText;
+                    //Log.d("test3", data);
+                    //save the data
+                    writeToFile(data);
+
+                    //start new activity
+                    startActivity(new Intent(LoginPage.this, MainActivity.class));
+
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
+                break;
+        }
+    }
+
+
+    private void writeToFile(String data) {
+        try {
+            File path = getApplicationContext().getFilesDir();
+            FileOutputStream writer = new FileOutputStream(new File(path, "config.txt"));
+            writer.write(data.getBytes());
+            //Log.d("test2", "done!!!");
+            writer.close();
+            //Toast.makeText(getApplicationContext(),"Wrote to file:"+ path.toString() +" config.txt", Toast.LENGTH_SHORT).show();
+            //Log.d("test2", "Wrote to file:"+ path.toString() +" config.txt");
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
     }
 }

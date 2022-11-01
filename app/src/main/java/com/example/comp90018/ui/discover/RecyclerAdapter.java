@@ -2,7 +2,7 @@ package com.example.comp90018.ui.discover;
 
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
+//import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 //import androidx.annotation.NonNull;
 //import androidx.recyclerview.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView;
+//import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.comp90018.R;
 

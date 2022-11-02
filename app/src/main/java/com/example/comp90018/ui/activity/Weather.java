@@ -33,21 +33,28 @@ public class Weather
         this.name = name;
     }
 
-    public static void initweather()
+    public static void initWeather()
     {
-        userArrayList = new ArrayList<>();
-        Weather hobbies1 = new Weather("0", "Family");
-        userArrayList.add(hobbies1);
+        Weather weather1 = new Weather("0", "Sunny");
+        userArrayList.add(weather1);
 
-        Weather hobbies2 = new Weather("1", "Friends");
-        userArrayList.add(hobbies2);
+        Weather weather2 = new Weather("1", "Clouds");
+        userArrayList.add(weather2);
 
-        Weather hobbies3 = new Weather("2", "Date");
-        userArrayList.add(hobbies3);
+        Weather weather3 = new Weather("2", "Rain");
+        userArrayList.add(weather3);
 
-        Weather hobbies4 = new Weather("3", "Party");
-        userArrayList.add(hobbies4);
+        Weather weather4 = new Weather("3", "Snow");
+        userArrayList.add(weather4);
 
+        Weather weather5 = new Weather("3", "Heat");
+        userArrayList.add(weather5);
+
+        Weather weather6 = new Weather("3", "Storm");
+        userArrayList.add(weather6);
+
+        Weather weather7 = new Weather("3", "Wind");
+        userArrayList.add(weather7);
     }
 
     public int getImage()
@@ -55,19 +62,21 @@ public class Weather
         switch (getId())
         {
             case "0":
-                return R.drawable.usericon0;
+                return R.drawable.weathericon0;
             case "1":
-                return R.drawable.usericon1;
-//            case "2":
-//                return R.drawable.usericon2;
-//            case "3":
-//                return R.drawable.usericon3;
-//            case "4":
-//                return R.drawable.usericon4;
-//            case "5":
-//                return R.drawable.usericon5;
+                return R.drawable.weathericon1;
+            case "2":
+                return R.drawable.weathericon2;
+            case "3":
+                return R.drawable.weathericon3;
+            case "4":
+                return R.drawable.weathericon4;
+            case "5":
+                return R.drawable.weathericon5;
+            case "6":
+                return R.drawable.weathericon6;
         }
-        return R.drawable.usericon0;
+        return R.drawable.weathericon0;
     }
 
     public static ArrayList<Weather> getUserArrayList()

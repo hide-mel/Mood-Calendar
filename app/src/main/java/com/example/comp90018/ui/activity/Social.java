@@ -55,19 +55,16 @@ public class Social
         switch (getId())
         {
             case "0":
-                return R.drawable.usericon0;
+                return R.drawable.socialicon0;
             case "1":
-                return R.drawable.usericon1;
+                return R.drawable.socialicon1;
             case "2":
-                return R.drawable.usericon0;
+                return R.drawable.socialicon2;
             case "3":
-                return R.drawable.usericon0;
-            case "4":
-                return R.drawable.usericon0;
-            case "5":
-                return R.drawable.usericon0;
+                return R.drawable.socialicon3;
+
         }
-        return R.drawable.usericon0;
+        return R.drawable.socialicon0;
     }
 
     public static ArrayList<Social> getUserArrayList()

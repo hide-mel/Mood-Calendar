@@ -35,17 +35,20 @@ public class Hobbies
 
     public static void initHobbies()
     {
-        Hobbies hobbies1 = new Hobbies("0", "Family");
+        Hobbies hobbies1 = new Hobbies("0", "Movies & tv");
         userArrayList.add(hobbies1);
 
-        Hobbies hobbies2 = new Hobbies("1", "Friends");
+        Hobbies hobbies2 = new Hobbies("1", "Reading");
         userArrayList.add(hobbies2);
 
-        Hobbies hobbies3 = new Hobbies("2", "Date");
+        Hobbies hobbies3 = new Hobbies("2", "Gaming");
         userArrayList.add(hobbies3);
 
-        Hobbies hobbies4 = new Hobbies("3", "Party");
+        Hobbies hobbies4 = new Hobbies("3", "Sport");
         userArrayList.add(hobbies4);
+
+        Hobbies hobbies5 = new Hobbies("3", "Relax");
+        userArrayList.add(hobbies5);
 
     }
 
@@ -54,19 +57,18 @@ public class Hobbies
         switch (getId())
         {
             case "0":
-                return R.drawable.usericon0;
+                return R.drawable.hobbiesicon0;
             case "1":
-                return R.drawable.usericon1;
-//            case "2":
-//                return R.drawable.usericon2;
-//            case "3":
-//                return R.drawable.usericon3;
-//            case "4":
-//                return R.drawable.usericon4;
-//            case "5":
-//                return R.drawable.usericon5;
+                return R.drawable.hobbiesicon1;
+            case "2":
+                return R.drawable.hobbiesicon2;
+            case "3":
+                return R.drawable.hobbiesicon3;
+            case "4":
+                return R.drawable.hobbiesicon4;
+
         }
-        return R.drawable.usericon0;
+        return R.drawable.hobbiesicon0;
     }
 
     public static ArrayList<Hobbies> getUserArrayList()

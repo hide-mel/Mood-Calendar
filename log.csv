@@ -1,0 +1,59 @@
+0e870a9,zisenw,33 minutes ago,final version v1.0
+d2070b2,zisenw,4 hours ago,Merge branch 'feature/hannah'
+9a8149e,HannahYZhao,6 hours ago,Update Weather.java
+b25585f,HannahYZhao,6 hours ago,Update Social.java
+6a15714,HannahYZhao,6 hours ago,Update Hobbies.java
+e108bdd,HannahYZhao,6 hours ago,Update Food.java
+664da46,Hannah Zhao,6 hours ago,update icons 1
+5a883f8,Hannah Zhao,6 hours ago,update icons
+bc40c69,yangpenglai,14 hours ago,Update UserAct.java
+c4563ec,yangpenglai,14 hours ago,update user activities
+06850d5,zisenw,25 hours ago,Merge branch 'feature/hannah'
+bf38627,zisenw,25 hours ago,user activity
+8f36a7d,HannahYZhao,26 hours ago,Update spinner_activity.xml
+edf3e7e,HannahYZhao,26 hours ago,Update custom_spinner_adapter.xml
+4ab4dcc,HannahYZhao,26 hours ago,Update User.java
+c8197d1,yangpenglai,26 hours ago,data from login to setting
+53d4b0f,HannahYZhao,26 hours ago,Update SpinnerAdapter.java
+f41eaef,HannahYZhao,26 hours ago,Update MainActivity.java
+2361733,HannahYZhao,26 hours ago,Update Hobbies.java
+6c1d808,yangpenglai,27 hours ago,Merge branch 'feature/hannah'
+4a1159c,yangpenglai,27 hours ago,Merge branch 'main' of https://github.com/zisenwang/COMP90018
+3a6c79a,yangpenglai,28 hours ago,data from login to setting
+b7d88e1,Hannah Zhao,28 hours ago,add activity
+fe85d8f,zisenw,30 hours ago,database
+e6dbe55,yangpenglai,31 hours ago,Merge branch 'testing'
+2f707e1,Hannah Zhao,31 hours ago,acticity
+aa96559,yangpenglai,31 hours ago,GPS location
+eaffe42,Katsuhide I,2 days ago,added feature to skip login
+0383ed9,Katsuhide I,2 days ago,Merge branch 'hide2'
+a15ca5e,Katsuhide I,2 days ago,added feature to save user info
+028d2f5,yangpenglai,2 days ago,testing
+e2f9f6d,yangpenglai,2 days ago,network testing
+9076a35,zisenw,2 days ago,emoji
+c575202,zisenw,2 days ago,Merge branch 'main' into feature/zisen
+6dd51f1,zisenw,2 days ago,update
+e0d2d44,zisenw,2 days ago,fix emotion gilitch
+42cada4,zisenw,3 days ago,emotion ui
+3ecaea2,zisenw,3 days ago,emotion ui
+fd49f8d,zisenw,3 days ago,Merge branch 'feature/zisen'
+b5b02db,zisenw,3 days ago,aws cloud, emotion detection
+c933f89,yangpenglai,4 days ago,discover and setting page
+63fc297,zisenw,4 days ago,secret fixed; emotion layout
+12fb35b,yangpenglai,5 days ago,setting page
+6582644,zisenw,5 days ago,secret fixed
+45cd494,zisenw,5 days ago,1. replace android.support with androidx 2. establish asw face recognition api
+5da5204,yangpenglai,6 days ago,merge main with discover
+9b5b73e,zisenw,6 days ago,fix bugs
+4694482,yangpenglai,7 days ago,first commit
+1c4853b,zisenw,8 days ago,Merge branch 'feature/zisen'
+ebb76f4,zisenw,8 days ago,Merge branch 'feature/hide'
+12b1e04,zisenw,8 days ago,Merge branch 'feature/hannah'
+5b85634,zisenw,8 days ago,incomplete settings and Azure API
+711f4b7,Hannah Zhao,9 days ago,first commit
+356b66f,Katsuhide I,2 weeks ago,initial setup ui
+448f519,HannahYZhao,3 weeks ago,Add files via upload
+54e8905,wangzs,3 weeks ago,Merge branch 'main' of https://github.com/zisenwang/COMP90018
+18434d3,wangzs,3 weeks ago,Basic framework
+b5a1d90,Katsuhide I,3 weeks ago,added sketch design
+6cf115d,wangzs,3 weeks ago,first commit

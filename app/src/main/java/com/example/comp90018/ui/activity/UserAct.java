@@ -91,8 +91,6 @@ public class UserAct extends AppCompatActivity
         };
 
         initial_mood();
-
-        //TODO complete name and image for food,hobbies,weather
         initial_spinners();
 
         initial_location();

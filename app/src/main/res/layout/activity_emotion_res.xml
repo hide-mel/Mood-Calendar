@@ -76,16 +76,18 @@
 
     <Button
         android:id="@+id/emo_res_wrong"
+        android:visibility="gone"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="76dp"
         android:text="not correct? enter manually"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/emo_res_conf" />
+        app:layout_constraintTop_toTopOf="@+id/emo_res_txt" />
 
     <Button
         android:id="@+id/emo_res_continue"
+        android:visibility="gone"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"

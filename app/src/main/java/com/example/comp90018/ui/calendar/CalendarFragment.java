@@ -14,6 +14,7 @@ import android.os.Bundle;
 //import android.support.v7.widget.GridLayoutManager;
 //import android.support.v7.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +39,8 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class CalendarFragment extends Fragment implements CalendarAdapter.OnItemListener{
 
@@ -73,7 +77,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
                 nextMonthAction(view);
             }
         });
-
+        roomDB = RoomDB.getInstance(getActivity());
         return view;
 
     }
@@ -151,23 +155,52 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     }
 
     @Override
-    public void onItemClick(int position, String dayText)
-    {
-        if(!dayText.equals(""))
-        {
+    public void onItemClick(int position, String dayText) {
+        // decide if click position has a date
+        Log.e("zisen", "onItemClick: calendar click" + dayText +".");
+        if(!dayText.equals("")) {
             String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
-            Toast.makeText(view.getContext(), message, Toast.LENGTH_LONG).show();
+            List<User> userList = roomDB.userDao().get(dayText,String.valueOf(selectedDate.getMonthValue())
+                    ,String.valueOf(selectedDate.getYear()));
+            if (userList.size() > 0){
+                Log.d("zisen", "onItemClick: calendar emotion in");
+                User user = userList.get(userList.size()-1);
+                AlertDialog a = new AlertDialog.Builder(getActivity())
+                        .setTitle(dayText + " " + monthYearFromDate(selectedDate))
+                        .setMessage( "Mood: " + user.getEmotion()
+                                + "\nLocation: " + user.getLocation() + "\n" + user.getActivity())
+                        .setIcon(moodToIcon(user.getEmotion()))
+                        .create();
+                a.show();
 
+            }else{
+                Toast.makeText(view.getContext(), message, Toast.LENGTH_LONG).show();
+            }
         }
+    }
 
-        //TODO: delete following code
-        User user = new User();
-        user.setDay(String.valueOf(LocalDate.now().getDayOfMonth()));
-        user.setMonth(String.valueOf(LocalDate.now().getMonthValue()));
-        user.setYear(String.valueOf(LocalDate.now().getYear()));
-        user.setEmotion("HAPPY");
-        user.setActivity("");
-        roomDB = RoomDB.getInstance(getActivity());
-        roomDB.userDao().insert(user);
+    public static int moodToIcon(String mood){
+        switch (mood){
+            case "HAPPY":
+                return R.drawable.happy_emoji;
+            case "SAD":
+                return R.drawable.sad_emoji;
+
+            case "ANGRY":
+                return R.drawable.angry_emoji;
+
+            case "CONFUSED":
+                return R.drawable.confused_emoji;
+            case "DISGUSTED":
+                return R.drawable.disgusted_emoji;
+            case "SURPRISED":
+                return R.drawable.surprise_emoji;
+            case "CALM":
+                return R.drawable.calm_emoji;
+            case "FEAR":
+                return R.drawable.fear_emoji;
+            default:
+                return R.drawable.unknown_emoji;
+        }
     }
 }

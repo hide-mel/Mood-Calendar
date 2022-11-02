@@ -2,8 +2,10 @@ package com.example.comp90018.ui.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.room.Room;
 
 import android.Manifest;
 import android.content.Context;
@@ -14,6 +16,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -28,7 +31,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.comp90018.MainActivity;
 import com.example.comp90018.R;
+import com.example.comp90018.database.RoomDB;
+import com.example.comp90018.database.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,6 +46,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Locale;
 
 
@@ -53,6 +60,7 @@ public class UserAct extends AppCompatActivity
     private Context context = this;
     private Handler handler;
     private TextView location_view;
+    private RoomDB roomDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -62,11 +70,12 @@ public class UserAct extends AppCompatActivity
         Log.e("TAG", "onCreate: aaaaaaaaaaaaaaaaa" );
         location_view = findViewById(R.id.show_locaiton);
         location_info = null;
+        roomDB = RoomDB.getInstance(this);
 
         SharedPreferences sp = getSharedPreferences("user_info", Context.MODE_PRIVATE);
 
-//        Log.e("TAG", "onCreate: "+sp.getString("location",null));
-//        location_view.setText("AAA");
+//        Log.e("TAG", "onCreate: "+);
+        location_view.setText(sp.getString("location",null));
 
         handler = new Handler(Looper.getMainLooper()){
             @Override
@@ -95,6 +104,7 @@ public class UserAct extends AppCompatActivity
     private void initial_confirm() {
         Button confirm = findViewById(R.id.add_activity_confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 SharedPreferences sp = getSharedPreferences("user_info", Context.MODE_PRIVATE);
@@ -104,38 +114,48 @@ public class UserAct extends AppCompatActivity
 
                 StringBuilder activities = new StringBuilder();
                 if (selected_social!=null){
-                    activities.append("social: "+selected_social+"\n");
+                    activities.append("Social: "+selected_social+"\n");
                 }
                 if (selected_hobbies!=null){
-                    activities.append("hobby: "+selected_hobbies+"\n");
+                    activities.append("Hobby: "+selected_hobbies+"\n");
                 }
                 if (selected_food!=null){
-                    activities.append("food: "+selected_food+"\n");
+                    activities.append("Food: "+selected_food+"\n");
                 }
                 if (selected_weather!=null){
-                    activities.append("weather: "+selected_weather+"\n");
+                    activities.append("Weather: "+selected_weather+"\n");
                 }
-                if (location_info!=null){
-                    activities.append("location: "+location_info+"\n");
-                }
-                // selected_mood
-                activities.append("mood: "+selected_mood+"\n");
+                Log.e("act", "onClick: " + activities);
+
 
                 EditText feeling = findViewById(R.id.feeling_text);
                 String feels = feeling.getText().toString();
                 if (!feels.equals("")){
-                    activities.append("\n "+feels+"\n");
+                    activities.append("Message: "+feels);
                 }
 
                 Log.e("TAG", "initial_confirm: "+activities.toString() );
 
 //                Toast.makeText(context,activities,Toast.LENGTH_LONG).show();
 
-                //TODO adding data to databse
+                // adding data to database
+                User user = new User();
+                user.setActivity(activities.toString());
+                user.setEmotion(selected_mood);
+                user.setLocation(location_info);
+                LocalDate now = LocalDate.now();
+                user.setDay(String.valueOf(now.getDayOfMonth()));
+                user.setMonth(String.valueOf(now.getMonthValue()));
+                user.setYear(String.valueOf(now.getYear()));
+                roomDB.userDao().insert(user);
                 //activities -> activities.toString()
                 //emotion -> selected_mood
 
+                Toast.makeText(getApplicationContext(),"Saved Successfully",Toast.LENGTH_LONG).show();
 
+                // close activity
+                Intent intent = new Intent(UserAct.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -145,14 +165,16 @@ public class UserAct extends AppCompatActivity
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserAct.this.finish();
+                Intent intent = new Intent(UserAct.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
 
     private void initial_mood() {
         Intent intent = getIntent();
-        if (intent.getStringExtra("emotion")!="manual_input"){
+        Log.e("initial", "initial_mood: emotion" + intent.getStringExtra("emotion") );
+        if (!intent.getStringExtra("emotion").equals("manual_input")){
             LinearLayout mood = findViewById(R.id.mood_selector);
             mood.setVisibility(View.GONE);
             selected_mood = intent.getStringExtra("emotion");
@@ -178,8 +200,8 @@ public class UserAct extends AppCompatActivity
     private void initial_spinners() {
         Social.initSocial();
         Hobbies.initHobbies();
-        Food.initfood();
-        Weather.initweather();
+        Food.initFood();
+        Weather.initWeather();
 
         Spinner spinner_social =  findViewById(R.id.spinner1);
         Spinner spinner_hobbies = findViewById(R.id.spinner2);
@@ -227,6 +249,7 @@ public class UserAct extends AppCompatActivity
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Food food = (Food) adapterView.getItemAtPosition(i);
                 selected_food = food.getName();
+                Log.e("food", "onItemSelected: " + selected_food);
             }
 
             @Override
@@ -239,7 +262,7 @@ public class UserAct extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Weather weather = (Weather) adapterView.getItemAtPosition(i);
-                selected_food = weather.getName();
+                selected_weather = weather.getName();
             }
 
             @Override
@@ -359,10 +382,16 @@ public class UserAct extends AppCompatActivity
             JSONObject jsonObject = new JSONObject(json);;
             JSONObject properties = jsonObject.getJSONArray("features")
                     .getJSONObject(0).getJSONObject("properties");
-            address.append(properties.get("street"));
-            address.append(",");
-            address.append(properties.get("suburb"));
-            address.append(",");
+            if (properties.has("street")){
+                address.append(properties.get("street"));
+                address.append(",");
+            }
+
+            if (properties.has("suburb")) {
+                address.append(properties.get("suburb"));
+                address.append(",");
+            }
+
             address.append(properties.get("city"));
             return address.toString();
         } catch (JSONException e) {

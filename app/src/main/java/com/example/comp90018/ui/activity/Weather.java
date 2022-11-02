@@ -47,13 +47,13 @@ public class Weather
         Weather weather4 = new Weather("3", "Snow");
         userArrayList.add(weather4);
 
-        Weather weather5 = new Weather("3", "Heat");
+        Weather weather5 = new Weather("4", "Heat");
         userArrayList.add(weather5);
 
-        Weather weather6 = new Weather("3", "Storm");
+        Weather weather6 = new Weather("5", "Storm");
         userArrayList.add(weather6);
 
-        Weather weather7 = new Weather("3", "Wind");
+        Weather weather7 = new Weather("6", "Wind");
         userArrayList.add(weather7);
     }
 

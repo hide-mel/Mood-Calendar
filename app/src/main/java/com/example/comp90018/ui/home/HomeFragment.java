@@ -35,8 +35,10 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
+import com.example.comp90018.MainActivity;
 import com.example.comp90018.R;
 import com.example.comp90018.databinding.FragmentHomeBinding;
+import com.example.comp90018.ui.activity.UserAct;
 import com.example.comp90018.ui.home.recface.FaceRecognition;
 
 import java.io.File;
@@ -153,6 +155,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     }
                 }else if(mode.equals("photo")){
                     toPhoto();
+                }else if (mode.equals("manual")){
+                    toManual();
                 }
         }
     }
@@ -175,6 +179,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 path = copyFileToInternalStorage(data.getData(),"");
 
                 Log.d("photo", "onActivityResult: path: " + path);
+            }else{
+                getActivity().recreate();
+//                startActivity(new Intent(activity.getApplicationContext(),MainActivity.class));
             }
         }
 
@@ -201,7 +208,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         if (data != null){
             // call emotion result ui
-            Intent intent = new Intent(this.getActivity().getBaseContext(), EmotionResultActivity.class);
+            Intent intent = new Intent(activity.getApplicationContext(), EmotionResultActivity.class);
             intent.putExtra("path",finalPath);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
             startActivity(intent);
@@ -292,6 +299,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Intent intent = new Intent(Intent.ACTION_PICK, null);
         intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*");
         startActivityForResult(intent,PHOTO_REQUEST);
+    }
+
+    private void toManual(){
+        Intent intent = new Intent(getContext(), UserAct.class);
+        intent.putExtra("emotion","manual_input");
+        startActivity(intent);
     }
 
 //    private void requestPermission() {

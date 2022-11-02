@@ -7,6 +7,7 @@ package com.example.comp90018.ui.calendar;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.os.Build;
 import android.util.Log;
 
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -65,6 +67,7 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
      * @param holder
      * @param position
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position)
     {
@@ -81,8 +84,8 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
                 // place a icon on instead of day
                 User res = queryRes.get(queryRes.size()-1);
                 String emo = res.getEmotion();
-                holder.dayOfMonth.setBackgroundResource(R.drawable.smile_face);
-                holder.dayOfMonth.setText("");
+                holder.dayOfMonth.setForeground(activity.getDrawable(CalendarFragment.moodToIcon(emo)));
+                holder.dayOfMonth.setText(day);
             }else{
                 // no emotion
                 // day of date

@@ -42,6 +42,9 @@ public class User implements Serializable {
     }
 
     public String getEmotion() {
+        if (emotion.equals("NOT HUMAN") || emotion.equals("More than one face detected")){
+            return "UNKNOWN";
+        }
         return emotion;
     }
 

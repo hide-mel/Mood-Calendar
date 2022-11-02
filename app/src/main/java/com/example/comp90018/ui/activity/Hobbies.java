@@ -35,7 +35,7 @@ public class Hobbies
 
     public static void initHobbies()
     {
-        Hobbies hobbies1 = new Hobbies("0", "Movies & tv");
+        Hobbies hobbies1 = new Hobbies("0", "Movies & TV");
         userArrayList.add(hobbies1);
 
         Hobbies hobbies2 = new Hobbies("1", "Reading");
@@ -47,7 +47,7 @@ public class Hobbies
         Hobbies hobbies4 = new Hobbies("3", "Sport");
         userArrayList.add(hobbies4);
 
-        Hobbies hobbies5 = new Hobbies("3", "Relax");
+        Hobbies hobbies5 = new Hobbies("4", "Relax");
         userArrayList.add(hobbies5);
 
     }

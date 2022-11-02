@@ -6,6 +6,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,6 +29,9 @@ public class EmotionResultActivity extends AppCompatActivity {
     private TextView tRes;
     private ImageView img;
     private ImageView icon;
+    private String emotion;
+    private Button confBtn;
+    private Button wrongBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,7 +51,7 @@ public class EmotionResultActivity extends AppCompatActivity {
                     }
                     Log.e("observer", "onChanged: " + "onchange启动");
                     // set result
-                    String emotion = stringStringMap.get("emotion");
+                    emotion = stringStringMap.get("emotion");
 
                     if (emotion == null) {
                         emotion = "NOT HUMAN";
@@ -94,6 +98,8 @@ public class EmotionResultActivity extends AppCompatActivity {
                     }
                     p.setVisibility(View.GONE);
                     icon.setVisibility(View.VISIBLE);
+                    confBtn.setVisibility(View.VISIBLE);
+                    wrongBtn.setVisibility(View.VISIBLE);
                     if (tRes != null) {
                         tRes.setText(emotion);
                     }
@@ -109,13 +115,24 @@ public class EmotionResultActivity extends AppCompatActivity {
         findViewById(R.id.emo_res_continue).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pressBtn();
+                pressContBtn();
+            }
+        });
+
+        findViewById(R.id.emo_res_wrong).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pressWrongBtn();
             }
         });
     }
 
-    private void pressBtn() {
-        startActivity(new Intent(this, UserAct.class));
+    private void pressWrongBtn() {
+        startActivity(new Intent(this, UserAct.class).putExtra("emotion","manual_input"));
+    }
+
+    private void pressContBtn() {
+        startActivity(new Intent(this, UserAct.class).putExtra("emotion",emotion));
     }
 
     /**
@@ -127,11 +144,15 @@ public class EmotionResultActivity extends AppCompatActivity {
         tConf = findViewById(R.id.emo_res_conf);
         tRes = findViewById(R.id.emo_res_txt);
         img = findViewById(R.id.emo_res_img);
+        confBtn = findViewById(R.id.emo_res_continue);
+        wrongBtn = findViewById(R.id.emo_res_wrong);
 
-
+        confBtn.setVisibility(View.GONE);
+        wrongBtn.setVisibility(View.GONE);
         p.setVisibility(View.VISIBLE);
         icon.setVisibility(View.GONE);
         String path = getIntent().getStringExtra("path");
+        Log.e("img", "initialize: " + path );
         img.setImageBitmap(BitmapFactory.decodeFile(path));
         tConf.setText("");
         tRes.setText("");
@@ -145,6 +166,9 @@ public class EmotionResultActivity extends AppCompatActivity {
         tRes.setText("");
         icon.setVisibility(View.GONE);
         p.setVisibility(View.VISIBLE);
+        confBtn.setVisibility(View.GONE);
+        wrongBtn.setVisibility(View.GONE);
+        EmotionResultActivity.this.finish();
     }
 
     @Override
@@ -154,6 +178,9 @@ public class EmotionResultActivity extends AppCompatActivity {
         tRes.setText("");
         icon.setVisibility(View.GONE);
         p.setVisibility(View.VISIBLE);
+        confBtn.setVisibility(View.GONE);
+        wrongBtn.setVisibility(View.GONE);
+        EmotionResultActivity.this.finish();
     }
 
     @Override
@@ -163,5 +190,7 @@ public class EmotionResultActivity extends AppCompatActivity {
         tRes.setText("");
         icon.setVisibility(View.GONE);
         p.setVisibility(View.VISIBLE);
+        confBtn.setVisibility(View.GONE);
+        wrongBtn.setVisibility(View.GONE);
     }
 }

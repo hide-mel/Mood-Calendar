@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-Mood Calendar is a mood tracker based on calendar to tracker your daily mood. 
+Mood Calendar is a mood tracker app to track your daily mood on calender and suggest articles to improve mood. 
 
 
 ## Features
